@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "live polling app",
   "main": "app-server.js",
-  "engines": {
-    "node": "4.1.1"
-  },
   "scripts": {
     "prestart": "babel ./es6 --out-dir .;webpack",
     "start": "node app-server.js",
@@ -17,5 +14,8 @@
     "express": "^4.13.3",
     "react": "^0.14.0",
     "react-dom": "^0.14.0"
+  },
+  "engines": {
+    "node": "4.1.1"
   }
 }
