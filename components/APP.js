@@ -3,7 +3,12 @@ import ReactDOM from 'react-dom';
 
 var APP = React.createClass({
 	render() {
-		return (<h1>es6 react</h1>);
+		return (
+		    <div>
+		        <h1>Live polling site</h1>
+		        <p>created using react,es6</p>
+		    </div>
+	    );
 	}
 });
 

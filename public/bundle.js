@@ -19634,9 +19634,18 @@
 
 		render: function render() {
 			return _react2['default'].createElement(
-				'h1',
+				'div',
 				null,
-				'es6 react'
+				_react2['default'].createElement(
+					'h1',
+					null,
+					'Live polling site'
+				),
+				_react2['default'].createElement(
+					'p',
+					null,
+					'created using react,es6'
+				)
 			);
 		}
 	});
