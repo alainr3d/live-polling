@@ -60,9 +60,7 @@
 
 	var _componentsAPP2 = _interopRequireDefault(_componentsAPP);
 
-	//window.addEventListener("onload",function(){
 	_reactDom2['default'].render(_react2['default'].createElement(_componentsAPP2['default'], null), document.getElementById("react-container"));
-	//})
 
 /***/ },
 /* 1 */
@@ -19638,7 +19636,7 @@
 			return _react2['default'].createElement(
 				'h1',
 				null,
-				'Hello World form React'
+				'es6 react'
 			);
 		}
 	});
