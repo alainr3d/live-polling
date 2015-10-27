@@ -19629,18 +19629,28 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
+	var _partsHeader = __webpack_require__(159);
+
+	var _partsHeader2 = _interopRequireDefault(_partsHeader);
+
+	var _partsDatabutton = __webpack_require__(160);
+
+	var _partsDatabutton2 = _interopRequireDefault(_partsDatabutton);
+
 	var APP = _react2['default'].createClass({
 		displayName: 'APP',
+
+		componentWillMount: function componentWillMount() {
+			//start app component
+			console.log("start app");
+		},
 
 		render: function render() {
 			return _react2['default'].createElement(
 				'div',
 				null,
-				_react2['default'].createElement(
-					'h1',
-					null,
-					'Live polling site'
-				),
+				_react2['default'].createElement(_partsHeader2['default'], { title: 'This is a header react component' }),
+				_react2['default'].createElement(_partsDatabutton2['default'], null),
 				_react2['default'].createElement(
 					'p',
 					null,
@@ -19651,6 +19661,84 @@
 	});
 
 	exports['default'] = APP;
+	module.exports = exports['default'];
+
+/***/ },
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+		value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(157);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var Header = _react2['default'].createClass({
+		displayName: 'Header',
+
+		propTypes: {
+			title: _react2['default'].PropTypes.string.isRequired
+		},
+
+		render: function render() {
+			return _react2['default'].createElement(
+				'header',
+				null,
+				_react2['default'].createElement(
+					'h1',
+					null,
+					this.props.title
+				)
+			);
+		}
+	});
+
+	exports['default'] = Header;
+	module.exports = exports['default'];
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+		value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(157);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var Databutton = _react2['default'].createClass({
+		displayName: 'Databutton',
+
+		handleClick: function handleClick() {
+			console.log("test click");
+		},
+
+		render: function render() {
+			return _react2['default'].createElement('div', { style: { width: "30px", height: "30px", backgroundColor: "green" }, onClick: this.handleClick });
+		}
+	});
+
+	exports['default'] = Databutton;
 	module.exports = exports['default'];
 
 /***/ }

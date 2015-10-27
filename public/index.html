@@ -3,10 +3,90 @@
     <head>
         <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
         <link rel="stylesheet" href="style.css" type="text/css" />
+        <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
     </head>
     <body>
         <div id="react-container">
         </div>
         <script type="text/javascript" src="bundle.js"></script>
+        
+        <h4 id="loginState"></h4>
+        
+        <script>
+            var dataRef = new Firebase('https://vivid-heat-4592.firebaseio.com/catdata');
+            
+            //dataRef.set({'name':'jane','lastname':'doe'});
+            
+            var blogsRef = new Firebase('https://vivid-heat-4592.firebaseio.com/blogs');
+            
+            blogsRef.on("child_added",function(blog){
+                var blog = blog.val();
+                
+                console.log(blog.title);
+                
+                var p = document.createElement('p');
+                p.innerHTML = blog.title;
+                document.body.appendChild(p);
+                
+            });
+            
+            /*
+            blogsRef.push().set({
+                'title':'first blog',
+                'description':'this is first description'
+            });
+            
+            blogsRef.push().set({
+                'title':'second blog',
+                'description':'this is second description'
+            },function(error){
+                console.log("success? ",error === false);
+            });
+            */
+            
+        </script>
+        
+        <script>
+            var loginStateEl = document.querySelector('#loginState');
+        
+            /*dataRef.authWithOAuthPopup("google", function(error, authData) {
+              if (error) {
+                loginStateEl.innerHTML = "Login Failed";
+                console.log("Login Failed!", error);
+              } else {
+                loginStateEl.innerHTML = "Successfully logged in!!";
+                console.log("Authenticated successfully with payload:", authData);
+              }
+            });*/
+            
+            
+            // prefer pop-ups, so we don't navigate away from the page
+            dataRef.authWithOAuthPopup("google", function(error, authData) {
+              if (error) {
+                if (error.code === "TRANSPORT_UNAVAILABLE") {
+                  // fall-back to browser redirects, and pick up the session
+                  // automatically when we come back to the origin page
+                  dataRef.authWithOAuthRedirect("google", function(error) { 
+                      
+                      loginStateEl.innerHTML = "Login Failed";
+                        
+                  });
+                }
+              } else if (authData) {
+                // user authenticated with Firebase
+                    loginStateEl.innerHTML = "Login Sucessful!";
+              }
+            });
+            
+            //var ref = new Firebase("https://<YOUR-FIREBASE-APP>.firebaseio.com");
+            /*dataRef.authWithOAuthRedirect("google", function(error) {
+              if (error) {
+                console.log("Login Failed!", error);
+              } else {
+                // We'll never get here, as the page will redirect on success.
+              }
+            });*/
+            
+        </script>
     </body>
 </html>

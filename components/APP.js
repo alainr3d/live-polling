@@ -1,11 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Header from './parts/Header';
+import Databutton from './parts/Databutton';
 
 var APP = React.createClass({
+	
+	componentWillMount(){
+		//start app component
+		console.log("start app");
+	},
+	
 	render() {
 		return (
 		    <div>
-		        <h1>Live polling site</h1>
+		        <Header title="This is a header react component" />
+		        <Databutton />
 		        <p>created using react,es6</p>
 		    </div>
 	    );
