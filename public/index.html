@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1">
         <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
         <link rel="stylesheet" href="style.css" type="text/css" />
         <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
@@ -75,6 +76,12 @@
               } else if (authData) {
                 // user authenticated with Firebase
                     loginStateEl.innerHTML = "Login Sucessful!";
+                    
+                    //save user
+                    dataRef.child('users').child(authData.uid).set({
+                        provider: authData.provider,
+                        name: authData.google.displayName
+                    })
               }
             });
             
