@@ -47,8 +47,64 @@
             
         </script>
         
+        <button onclick='facebookLogin()'>Facebook Login</button>
+        <button onclick='googleLogin()'>Google Login</button>
+        
         <script>
+            var usersRef = new Firebase('https://vivid-heat-4592.firebaseio.com/users');
             var loginStateEl = document.querySelector('#loginState');
+            
+            function facebookLogin(){
+                // prefer pop-ups, so we don't navigate away from the page
+                usersRef.authWithOAuthPopup("facebook", function(error, authData) {
+                  if (error) {
+                    if (error.code === "TRANSPORT_UNAVAILABLE") {
+                      // fall-back to browser redirects, and pick up the session
+                      // automatically when we come back to the origin page
+                      usersRef.authWithOAuthRedirect("facebook", function(error) { 
+                          
+                          loginStateEl.innerHTML = "Login Failed";
+                            
+                      });
+                    }
+                  } else if (authData) {
+                    // user authenticated with Firebase
+                        loginStateEl.innerHTML = "Login Sucessful!";
+                        
+                        //save user
+                        usersRef.child(authData.uid).set({
+                            provider: authData.provider,
+                            name: authData.facebook.displayName
+                        })
+                  }
+                });
+            }
+            
+            function googleLogin(){
+                // prefer pop-ups, so we don't navigate away from the page
+                usersRef.authWithOAuthPopup("google", function(error, authData) {
+                  if (error) {
+                    if (error.code === "TRANSPORT_UNAVAILABLE") {
+                      // fall-back to browser redirects, and pick up the session
+                      // automatically when we come back to the origin page
+                      usersRef.authWithOAuthRedirect("google", function(error) { 
+                          
+                          loginStateEl.innerHTML = "Login Failed";
+                            
+                      });
+                    }
+                  } else if (authData) {
+                    // user authenticated with Firebase
+                        loginStateEl.innerHTML = "Login Sucessful!";
+                        
+                        //save user
+                        usersRef.child(authData.uid).set({
+                            provider: authData.provider,
+                            name: authData.google.displayName
+                        })
+                  }
+                });
+            }
         
             /*dataRef.authWithOAuthPopup("google", function(error, authData) {
               if (error) {
@@ -60,30 +116,6 @@
               }
             });*/
             
-            
-            // prefer pop-ups, so we don't navigate away from the page
-            dataRef.authWithOAuthPopup("google", function(error, authData) {
-              if (error) {
-                if (error.code === "TRANSPORT_UNAVAILABLE") {
-                  // fall-back to browser redirects, and pick up the session
-                  // automatically when we come back to the origin page
-                  dataRef.authWithOAuthRedirect("google", function(error) { 
-                      
-                      loginStateEl.innerHTML = "Login Failed";
-                        
-                  });
-                }
-              } else if (authData) {
-                // user authenticated with Firebase
-                    loginStateEl.innerHTML = "Login Sucessful!";
-                    
-                    //save user
-                    dataRef.child('users').child(authData.uid).set({
-                        provider: authData.provider,
-                        name: authData.google.displayName
-                    })
-              }
-            });
             
             //var ref = new Firebase("https://<YOUR-FIREBASE-APP>.firebaseio.com");
             /*dataRef.authWithOAuthRedirect("google", function(error) {
